@@ -111,29 +111,32 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
       {/* Modal */}
       {selectedPhoto && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/70"
           onClick={() => setSelectedPhoto(null)}
         >
           <div 
-            className="bg-white rounded-2xl p-4 max-w-md w-full shadow-2xl animate-pop"
+            className="relative bg-white rounded-2xl p-4 w-full max-w-md max-h-[90vh] flex flex-col shadow-2xl animate-pop"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
             <button 
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-3 right-3 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500"
+              className="absolute top-2 right-2 z-10 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500"
             >
               <X size={18} />
             </button>
 
-            <div className="mt-4 mb-4">
+            {/* Image Container - Scrollable with max height */}
+            <div className="flex-1 overflow-hidden mt-2 mb-3 min-h-0">
               <img 
                 src={selectedPhoto.enhanced || selectedPhoto.original} 
                 alt="Selected" 
-                className="w-full rounded-lg"
+                className="w-full h-auto max-h-[55vh] object-contain rounded-lg"
               />
             </div>
 
-            <div className="flex items-center justify-between px-1 mb-4 text-sm text-slate-500">
+            {/* Info Row */}
+            <div className="flex items-center justify-between px-1 mb-3 text-sm text-slate-500 flex-shrink-0">
               <span className="flex items-center gap-1">
                 <Calendar size={14} /> {formatDate(selectedPhoto.timestamp)}
               </span>
@@ -142,16 +145,17 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            {/* Action Buttons - Always visible */}
+            <div className="grid grid-cols-2 gap-2 flex-shrink-0">
               <button 
                 onClick={() => download(selectedPhoto.enhanced || selectedPhoto.original, selectedPhoto.id)}
-                className="py-3 bg-slate-800 text-white rounded-xl font-bold flex items-center justify-center gap-2"
+                className="py-3 bg-slate-800 text-white rounded-xl font-bold flex items-center justify-center gap-2 text-sm"
               >
                 <Download size={16} /> Download
               </button>
               <button 
                 onClick={() => handleDelete(selectedPhoto.id)}
-                className={`py-3 rounded-xl font-bold flex items-center justify-center gap-2 ${
+                className={`py-3 rounded-xl font-bold flex items-center justify-center gap-2 text-sm ${
                   deleteConfirm === selectedPhoto.id
                     ? 'bg-red-500 text-white'
                     : 'bg-red-50 text-red-500'
