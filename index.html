@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#fce7f3" />
+    
+    <!-- SEO Meta Tags -->
+    <title>BlushBooth ✨ | Cute AI Photo Booth</title>
+    <meta name="description" content="BlushBooth - The cutest AI-powered photo booth! Take adorable selfies, apply magical filters, create photo strips, and save precious memories. 💕" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts - Only load what we need -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Nunito', 'sans-serif'],
+            },
+            colors: {
+              blush: {
+                50: '#fff1f2',
+                100: '#ffe4e6',
+                200: '#fecdd3',
+                300: '#fda4af',
+                400: '#fb7185',
+                500: '#f43f5e',
+                600: '#e11d48',
+              },
+              cream: '#fdfbf7',
+            },
+            animation: {
+              'flash': 'flash 0.5s ease-out',
+              'pop': 'pop 0.3s ease-out',
+              'print-slide': 'printSlide 3s ease-out forwards',
+              'fade-in': 'fadeIn 0.3s ease-out',
+              'fade-in-up': 'fadeInUp 0.3s ease-out',
+              'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+            },
+            keyframes: {
+              flash: {
+                '0%': { opacity: '0' },
+                '10%': { opacity: '1', backgroundColor: 'white' },
+                '100%': { opacity: '0' },
+              },
+              pop: {
+                '0%': { transform: 'scale(0.95)', opacity: '0' },
+                '100%': { transform: 'scale(1)', opacity: '1' },
+              },
+              printSlide: {
+                '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                '20%': { opacity: '1' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              pulseSoft: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0.7' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    
+    <style>
+      /* Lightweight Base Styles */
+      body {
+        background: linear-gradient(135deg, #fff5f7 0%, #fdf2f8 50%, #faf5ff 100%);
+        color: #4a4a4a;
+        overflow-x: hidden;
+      }
+      
+      /* Simple Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fce7f3;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #fb7185;
+        border-radius: 10px;
+      }
+      
+      /* Lightweight Glass Effect - no blur */
+      .glass {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+      
+      /* Selection */
+      ::selection {
+        background: #fce7f3;
+        color: #be185d;
+      }
+      
+      /* Hide scrollbar but keep functionality */
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      
+      /* Safe Area for Mobile */
+      .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      
+      /* Simple Button Hover */
+      .btn-cute {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .btn-cute:hover {
+        transform: translateY(-2px);
+      }
+      .btn-cute:active {
+        transform: translateY(0);
+      }
+      
+      /* Focus Ring */
+      *:focus-visible {
+        outline: 2px solid #f9a8d4;
+        outline-offset: 2px;
+      }
+      
+      /* Paper Texture - Simplified */
+      .paper-texture {
+        background-color: #fffbfc;
+      }
+    </style>
+    
+    <!-- Import Map for Modules -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+          "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+          "react/": "https://esm.sh/react@^19.2.3/",
+          "react": "https://esm.sh/react@^19.2.3",
+          "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+          "uuid": "https://esm.sh/uuid@^13.0.0"
+        }
+      }
+    </script>
+    
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  
+  <body>
+    <!-- Main App Root -->
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "BlushBooth",
+  "description": "An aesthetic, Gen-Z friendly photobooth web app with filters, templates, and AI enhancement.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
