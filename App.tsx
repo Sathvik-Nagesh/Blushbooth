@@ -101,6 +101,7 @@ export default function App() {
                   ? 'bg-white text-rose-600 shadow-sm' 
                   : 'text-rose-400 hover:text-rose-600'
               }`}
+              aria-label="Capture mode"
             >
               <Camera size={16} />
               <span className="hidden sm:inline">Capture</span>
@@ -113,6 +114,7 @@ export default function App() {
                   ? 'bg-white text-rose-600 shadow-sm' 
                   : 'text-rose-400 hover:text-rose-600'
               }`}
+              aria-label={photos.length > 0 ? `View memories, ${photos.length} photos` : "View memories"}
             >
               <ImageIcon size={16} />
               <span className="hidden sm:inline">Memories</span>
