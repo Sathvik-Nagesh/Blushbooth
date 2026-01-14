@@ -192,12 +192,14 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="p-2 bg-black/40 rounded-full text-white"
+              aria-label={isMuted ? "Unmute sound" : "Mute sound"}
             >
               {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
             </button>
             <button
               onClick={() => setFacingMode(prev => prev === 'user' ? 'environment' : 'user')}
               className="p-2 bg-black/40 rounded-full text-white"
+              aria-label="Switch camera"
             >
               <RefreshCw size={16} />
             </button>
@@ -326,6 +328,7 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
               onClick={startBoothSequence}
               disabled={!!countdown}
               className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white flex items-center justify-center shadow-lg active:scale-95 transition-transform disabled:opacity-50 -mt-6"
+              aria-label="Take photo"
             >
               <Play className="ml-1" size={24} fill="white" />
             </button>
@@ -342,6 +345,7 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                   setSelectedPattern(BorderPattern.NONE);
                 }}
                 className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-rose-400 hover:text-rose-600"
+                aria-label="Reset camera"
               >
                 <X size={18} />
               </button>
