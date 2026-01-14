@@ -107,20 +107,24 @@ export const EditorView: React.FC<EditorViewProps> = ({ images, onSave, onCancel
       const sourceImages = enhancedImages || images;
       const finalResult = await applyFiltersAndTemplate(sourceImages, settings, template, borderPattern, 1200, 1200);
       
-      // Properly create and trigger download
+      // Convert Data URL to Blob for better download reliability
+      const res = await fetch(finalResult);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
       const link = document.createElement('a');
-      link.href = finalResult;
+      link.href = blobUrl;
       link.download = `blushbooth-${Date.now()}.png`;
-      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       
-      // Clean up after a small delay
+      // Clean up
       setTimeout(() => {
         document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
       }, 100);
 
-      onSave({
+      const photoData: PhotoData = {
         id: uuidv4(),
         original: finalResult,
         enhanced: enhancedImages ? finalResult : undefined,
@@ -130,10 +134,12 @@ export const EditorView: React.FC<EditorViewProps> = ({ images, onSave, onCancel
         filter: settings.type,
         borderPattern,
         aiPreset: appliedPreset,
-      });
+      };
+
+      onSave(photoData);
     } catch (error) {
       console.error('Save error:', error);
-      alert("Failed to save photo.");
+      alert("Failed to save photo. Please try again.");
     } finally {
       setIsSaving(false);
     }

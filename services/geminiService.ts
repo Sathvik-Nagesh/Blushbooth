@@ -16,7 +16,7 @@ export const enhanceImage = async (base64Image: string, preset: AIPreset = AIPre
     const ai = new GoogleGenAI({ apiKey: API_KEY });
     
     const cleanBase64 = base64Image.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-    const model = 'gemini-2.5-flash-image';
+    const model = 'gemini-1.5-flash';
     
     // Base instruction for ALL presets to ensure face preservation
     const preservationInstruction = "CRITICAL: You must strictly preserve the original person's facial structure, identity, and features. Do not morph the face, do not change the eye shape, nose shape, or jawline. Only apply the style/lighting/color effects.";

@@ -12,14 +12,30 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoData | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
-  const download = (src: string, id: string) => {
-    const link = document.createElement('a');
-    link.href = src;
-    link.download = `blushbooth-${id}.png`;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    setTimeout(() => document.body.removeChild(link), 100);
+  const download = async (src: string, id: string) => {
+    try {
+      const res = await fetch(src);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `blushbooth-${id}.png`;
+      document.body.appendChild(link);
+      link.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    } catch (e) {
+      console.error("Download failed", e);
+      // Fallback
+      const link = document.createElement('a');
+      link.href = src;
+      link.download = `blushbooth-${id}.png`;
+      link.click();
+    }
   };
 
   const formatDate = (timestamp: number) => {
