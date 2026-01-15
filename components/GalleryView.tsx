@@ -64,7 +64,11 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
       
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={onBack} className="p-2 bg-white hover:bg-rose-50 rounded-lg text-rose-500 border border-rose-100">
+        <button
+          onClick={onBack}
+          className="p-2 bg-white hover:bg-rose-50 rounded-lg text-rose-500 border border-rose-100"
+          aria-label="Go back to camera"
+        >
           <ChevronLeft size={20} />
         </button>
         <div>
@@ -122,6 +126,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
             <button 
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-2 right-2 z-10 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500"
+              aria-label="Close photo view"
             >
               <X size={18} />
             </button>
