@@ -64,7 +64,11 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
       
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={onBack} className="p-2 bg-white hover:bg-rose-50 rounded-lg text-rose-500 border border-rose-100">
+        <button
+          onClick={onBack}
+          className="p-2 bg-white hover:bg-rose-50 rounded-lg text-rose-500 border border-rose-100"
+          aria-label="Back to camera"
+        >
           <ChevronLeft size={20} />
         </button>
         <div>
@@ -92,18 +96,19 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
         /* Photo Grid */
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {photos.map((photo) => (
-            <div 
+            <button
               key={photo.id}
               onClick={() => setSelectedPhoto(photo)}
-              className="aspect-square bg-white rounded-xl p-1.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-rose-50"
+              className="w-full aspect-square bg-white rounded-xl p-1.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-rose-50 focus-visible:ring-2 focus-visible:ring-rose-500 focus:outline-none"
+              aria-label={`View photo from ${formatDate(photo.timestamp)}`}
             >
               <img 
                 src={photo.enhanced || photo.original} 
-                alt="Memory" 
+                alt=""
                 className="w-full h-full object-cover rounded-lg"
                 loading="lazy"
               />
-            </div>
+            </button>
           ))}
         </div>
       )}
@@ -122,6 +127,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({ photos, onDelete, onBa
             <button 
               onClick={() => setSelectedPhoto(null)}
               className="absolute top-2 right-2 z-10 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500"
+              aria-label="Close photo view"
             >
               <X size={18} />
             </button>
