@@ -302,16 +302,24 @@ export const EditorView: React.FC<EditorViewProps> = ({ images, onSave, onCancel
               ].map(control => (
                 <div key={control.key}>
                   <div className="flex justify-between mb-1">
-                    <span className="text-xs font-bold text-slate-500">{control.label}</span>
+                    <label
+                      htmlFor={`adjust-${control.key}`}
+                      className="text-xs font-bold text-slate-500 cursor-pointer hover:text-rose-500 transition-colors"
+                    >
+                      {control.label}
+                    </label>
                     <span className="text-xs text-rose-500 font-mono">{settings[control.key as keyof FilterSettings]}</span>
                   </div>
                   <input
+                    id={`adjust-${control.key}`}
                     type="range"
                     min={control.min}
                     max={control.max}
                     value={settings[control.key as keyof FilterSettings]}
                     onChange={(e) => setSettings(s => ({ ...s, [control.key]: Number(e.target.value) }))}
-                    className="w-full"
+                    onDoubleClick={() => setSettings(s => ({ ...s, [control.key]: 0 }))}
+                    title="Double-click to reset"
+                    className="w-full cursor-pointer"
                   />
                 </div>
               ))}
