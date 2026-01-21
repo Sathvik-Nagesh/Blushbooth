@@ -256,6 +256,7 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                         ? 'bg-rose-500 text-white' 
                         : 'bg-white/10 text-white hover:bg-white/20'
                     }`}
+                    aria-pressed={captureMode === opt.m}
                   >
                     {opt.label}
                   </button>
@@ -278,6 +279,7 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                             ? 'bg-white text-rose-600' 
                             : 'bg-white/10 text-white hover:bg-white/20'
                         }`}
+                        aria-pressed={selectedPattern === p.id}
                       >
                         {p.emoji} {p.label}
                       </button>
@@ -316,6 +318,8 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                         ? 'bg-rose-500 text-white' 
                         : 'bg-white text-rose-400'
                     }`}
+                    aria-pressed={timerDuration === t}
+                    aria-label={`Set timer to ${t} seconds`}
                   >
                     {t}s
                   </button>
